@@ -121,12 +121,23 @@
       }
 
       .result {
-        margin-top: 20px;
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-around; /* Distribui os itens igualmente */
+        align-items: center; /* Centraliza verticalmente os itens */
+        gap: 10px; /* Espaçamento entre as caixas */
       }
 
       .result p {
-        font-size: 1rem;
-        margin-bottom: 10px;
+        padding: 10px; 
+        border: 1px solid #ffffff15; 
+        background-color: #ffffff00; 
+        border-radius: 5px; 
+        margin: 0;
+        min-width: 80px; 
+        text-align: center; 
+        font-size: 14px;
+        line-height: 25px;
       }
 
       .cred {
@@ -178,7 +189,6 @@
         <select id="preco-geral">
           <option value="padrao">Preço Padrão</option>
           <option value="parceria">Preço Parceria</option>
-          
         </select>
       </div>
 
@@ -228,9 +238,9 @@
         <button onclick="resetar()" class="reset-btn">↺</button>
       </div>
       <div class="result">
-        <p id="valorTotal">Valor Total: R$ 0,00</p>
-        <p id="lucro">Seu Lucro: R$ 0,00</p>
-        <p id="gerente">Repassar: R$ 0,00</p>
+        <p id="valorTotal">Total</p>
+        <p id="lucro">Lucro</p>
+        <p id="gerente">Repassar</p>
       </div>
 
       <div class="footer">
@@ -311,17 +321,17 @@
         // Atualizar os resultados na página
         document.getElementById(
           "valorTotal"
-        ).innerText = `Valor Total: R$ ${total.toLocaleString("pt-BR", {
+        ).innerText = `Total ${total.toLocaleString("pt-BR", {
           minimumFractionDigits: 2,
         })}`;
         document.getElementById(
           "lucro"
-        ).innerText = `Seu Lucro: R$ ${lucro.toLocaleString("pt-BR", {
+        ).innerText = `Lucro ${lucro.toLocaleString("pt-BR", {
           minimumFractionDigits: 2,
         })}`;
         document.getElementById(
           "gerente"
-        ).innerText = `Repassar: R$ ${enviarGerente.toLocaleString("pt-BR", {
+        ).innerText = `Repassar ${enviarGerente.toLocaleString("pt-BR", {
           minimumFractionDigits: 2,
         })}`;
       }
@@ -338,10 +348,9 @@
         document.getElementById("rastreador").value = "";
 
         // Limpar os resultados na tela
-        document.getElementById("valorTotal").innerText =
-          "Valor Total: R$ 0,00";
-        document.getElementById("lucro").innerText = "Seu Lucro: R$ 0,00";
-        document.getElementById("gerente").innerText = "Repassar: R$ 0,00";
+        document.getElementById("valorTotal").innerText = "Total 0,00";
+        document.getElementById("lucro").innerText = "Lucro 0,00";
+        document.getElementById("gerente").innerText = "Repassar 0,00";
       }
     </script>
   </body>
