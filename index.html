@@ -150,6 +150,7 @@
           <option value="taliba">Talibã</option>
           <option value="topsecret">Top Secret</option>
           <option value="turquia">Turquia</option>
+          <option value="tropadoporto">Tropa do Porto</option>
           <option value="vidarasa">Vida Rasa</option>
         </select>
       </div>
@@ -223,76 +224,88 @@
     </div>
 
     <script>
-      function calcular() {
-        // Preços de parceria e padrão para cada item
-        const precos = {
-          parceria: {
-            lockpick: 30000,
-            placa: 30000,
-            relogio: 10000,
-            masterpick: 70000,
-            algemas: 40000,
-            corda: 20000,
-            mascara: 10000,
-            rastreador: 90000,
-          },
-          padrao: {
-            lockpick: 40000,
-            placa: 40000,
-            relogio: 25000,
-            masterpick: 80000,
-            algemas: 50000,
-            corda: 30000,
-            mascara: 12000,
-            rastreador: 100000,
-          },
-        };
-
-        // Pegar a escolha do usuário: parceria ou padrão
-        const escolha = document.getElementById("preco-geral").value;
-
-        // Pegar a quantidade de cada item
-        const lockpickQtd = document.getElementById("lockpick").value || 0;
-        const placaQtd = document.getElementById("placa").value || 0;
-        const relogioQtd = document.getElementById("relogio").value || 0;
-        const masterpickQtd = document.getElementById("masterpick").value || 0;
-        const algemasQtd = document.getElementById("algemas").value || 0;
-        const cordaQtd = document.getElementById("corda").value || 0;
-        const mascaraQtd = document.getElementById("mascara").value || 0;
-        const rastreadorQtd = document.getElementById("rastreador").value || 0;
-
-        // Calcular o total com base na escolha de preços
-        let total = 0;
-        total += lockpickQtd * precos[escolha].lockpick;
-        total += placaQtd * precos[escolha].placa;
-        total += relogioQtd * precos[escolha].relogio;
-        total += masterpickQtd * precos[escolha].masterpick;
-        total += algemasQtd * precos[escolha].algemas;
-        total += cordaQtd * precos[escolha].corda;
-        total += mascaraQtd * precos[escolha].mascara;
-        total += rastreadorQtd * precos[escolha].rastreador;
-
-        // Calcular lucro (30%) e valor a repassar ao gerente (70%)
-        const lucro = total * 0.3;
-        const enviarGerente = total * 0.7;
-
-        // Atualizar os resultados na página
-        document.getElementById(
-          "valorTotal"
-        ).innerText = `Valor Total: R$ ${total.toLocaleString("pt-BR", {
-          minimumFractionDigits: 2,
-        })}`;
-        document.getElementById(
-          "lucro"
-        ).innerText = `Seu Lucro: R$ ${lucro.toLocaleString("pt-BR", {
-          minimumFractionDigits: 2,
-        })}`;
-        document.getElementById(
-          "gerente"
-        ).innerText = `Repassar: R$ ${enviarGerente.toLocaleString("pt-BR", {
-          minimumFractionDigits: 2,
-        })}`;
-      }
-    </script>
+        function calcular() {
+          // Preços de parceria e padrão para cada item
+          const precos = {
+            parceria: {
+              lockpick: 30000,
+              placa: 30000,
+              relogio: 10000,
+              masterpick: 70000,
+              algemas: 40000,
+              corda: 20000,
+              mascara: 10000,
+              rastreador: 90000,
+            },
+            padrao: {
+              lockpick: 40000,
+              placa: 40000,
+              relogio: 25000,
+              masterpick: 80000,
+              algemas: 50000,
+              corda: 30000,
+              mascara: 12000,
+              rastreador: 100000,
+            },
+          };
+      
+          // Pegar a escolha do usuário: parceria ou padrão
+          const escolha = document.getElementById("preco-geral").value;
+      
+          // Pegar a quantidade de cada item
+          const lockpickQtd = document.getElementById("lockpick").value || 0;
+          const placaQtd = document.getElementById("placa").value || 0;
+          const relogioQtd = document.getElementById("relogio").value || 0;
+          const masterpickQtd = document.getElementById("masterpick").value || 0;
+          const algemasQtd = document.getElementById("algemas").value || 0;
+          const cordaQtd = document.getElementById("corda").value || 0;
+          const mascaraQtd = document.getElementById("mascara").value || 0;
+          const rastreadorQtd = document.getElementById("rastreador").value || 0;
+      
+          // Calcular o total com base na escolha de preços (valor visível)
+          let total = 0;
+          total += lockpickQtd * precos[escolha].lockpick;
+          total += placaQtd * precos[escolha].placa;
+          total += relogioQtd * precos[escolha].relogio;
+          total += masterpickQtd * precos[escolha].masterpick;
+          total += algemasQtd * precos[escolha].algemas;
+          total += cordaQtd * precos[escolha].corda;
+          total += mascaraQtd * precos[escolha].mascara;
+          total += rastreadorQtd * precos[escolha].rastreador;
+      
+          // Calcular o valor da parceria para o repasse e lucro
+          let valorParceria = 0;
+          valorParceria += lockpickQtd * precos["parceria"].lockpick;
+          valorParceria += placaQtd * precos["parceria"].placa;
+          valorParceria += relogioQtd * precos["parceria"].relogio;
+          valorParceria += masterpickQtd * precos["parceria"].masterpick;
+          valorParceria += algemasQtd * precos["parceria"].algemas;
+          valorParceria += cordaQtd * precos["parceria"].corda;
+          valorParceria += mascaraQtd * precos["parceria"].mascara;
+          valorParceria += rastreadorQtd * precos["parceria"].rastreador;
+      
+          // Calcular lucro (30%) e valor a repassar ao gerente (70%) com base na parceria
+          const lucro = valorParceria * 0.3;
+          const enviarGerente = valorParceria * 0.7;
+      
+          // Atualizar os resultados na página
+          document.getElementById(
+            "valorTotal"
+          ).innerText = `Valor Total: R$ ${total.toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+          })}`;
+          document.getElementById(
+            "lucro"
+          ).innerText = `Seu Lucro: R$ ${lucro.toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+          })}`;
+          document.getElementById(
+            "gerente"
+          ).innerText = `Repassar: R$ ${enviarGerente.toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+          })}`;
+        }
+      </script>
+      
   </body>
 </html>
