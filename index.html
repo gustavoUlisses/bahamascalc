@@ -233,6 +233,16 @@
         <input type="number" id="rastreador" max="999" placeholder="Qtd" />
       </div>
 
+      <div class="item">
+        <label for="capuz">⚫️ Capuz → 20k | 30k</label>
+        <input type="number" id="capuz" max="999" placeholder="Qtd" />
+      </div>
+
+      <div class="item">
+        <label for="keycard">💳 KeyCard → 40k | 50k</label>
+        <input type="number" id="keycard" max="999" placeholder="Qtd" />
+      </div>
+
       <div class="button-container">
         <button onclick="calcular()">Calcular</button>
         <button onclick="resetar()" class="reset-btn">↺</button>
@@ -266,6 +276,8 @@
             corda: 20000,
             mascara: 10000,
             rastreador: 90000,
+            capuz: 20000,
+            keycard: 30000,
           },
           padrao: {
             lockpick: 40000,
@@ -276,6 +288,8 @@
             corda: 30000,
             mascara: 12000,
             rastreador: 100000,
+            capuz: 30000,
+            keycard: 40000,
           },
         };
 
@@ -291,6 +305,8 @@
         const cordaQtd = document.getElementById("corda").value || 0;
         const mascaraQtd = document.getElementById("mascara").value || 0;
         const rastreadorQtd = document.getElementById("rastreador").value || 0;
+        const capuzQtd = document.getElementById("capuz").value || 0;
+        const keycardQtd = document.getElementById("keycard").value || 0;
 
         // Calcular o total com base na escolha de preços (valor visível)
         let total = 0;
@@ -302,6 +318,8 @@
         total += cordaQtd * precos[escolha].corda;
         total += mascaraQtd * precos[escolha].mascara;
         total += rastreadorQtd * precos[escolha].rastreador;
+        total += capuzQtd * precos[escolha].capuz;
+        total += keycardQtd * precos[escolha].keycard;
 
         // Calcular o valor da parceria para o repasse e lucro
         let valorParceria = 0;
@@ -313,6 +331,8 @@
         valorParceria += cordaQtd * precos["parceria"].corda;
         valorParceria += mascaraQtd * precos["parceria"].mascara;
         valorParceria += rastreadorQtd * precos["parceria"].rastreador;
+        valorParceria += capuzQtd * precos["parceria"].capuz;
+        valorParceria += keycardQtd * precos["parceria"].keycard;
 
         // Calcular lucro (30%) e valor a repassar ao gerente (70%) com base na parceria
         const lucro = valorParceria * 0.3;
@@ -346,6 +366,8 @@
         document.getElementById("corda").value = "";
         document.getElementById("mascara").value = "";
         document.getElementById("rastreador").value = "";
+        document.getElementById("capuz").value = "";
+        document.getElementById("keycard").value = "";
 
         // Limpar os resultados na tela
         document.getElementById("valorTotal").innerText = "Total 0,00";
